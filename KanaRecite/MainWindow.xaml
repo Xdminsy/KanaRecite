@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="KanaRecite" Height="370.349" Width="356.105" AllowsTransparency="True" WindowStyle="None" MouseDown="WinMouseDown" Icon="icon.png" Loaded="WinLoaded" Background="White">
-    <Grid Background="#FFCB9219">
+    <Grid Background="#FF00B9FF">
         <Label x:Name="Gana" Content="あ" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="144" Margin="0,37,0,0" Loaded="GanaLoaded"/>
         <Button x:Name="NextButton" Content="Next" HorizontalAlignment="Center" Height="29" Margin="172,261,67,0" VerticalAlignment="Top" Width="90" Click="NextButtonClick"/>
         <TextBox x:Name="SoundTextBox" HorizontalAlignment="Center" Height="30" Margin="77,226,70,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" FontSize="18" HorizontalContentAlignment="Center" KeyDown="SoundTextBoxKeyDown"/>
