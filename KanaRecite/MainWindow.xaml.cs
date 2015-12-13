@@ -83,7 +83,7 @@ namespace KanaRecite
             string content;
             if (string.IsNullOrEmpty(SoundTextBox.Text.Trim()))
             {
-                content = "You typed nothing.";
+                Comment.Content = "You typed nothing.";
                 if (Emptyed) {
                     commentFlash();
                 } else { 
@@ -96,16 +96,15 @@ namespace KanaRecite
                 Emptyed = false;
                 if (SoundTextBox.Text.Trim() == sound)
                 {
-                    content = praise[r.Next(praise.Length)];
+                    Comment.Content = praise[r.Next(praise.Length)];
                     commentIn((s, e) => { commentFlash((s2, e2) => { commentOut((s3, e3) => { nextKana(); }); }); });
                 }
                 else
                 {
-                    content = "Sorry, it's " + sound;
+                    Comment.content = "Sorry, it's " + sound;
                     commentIn();
                     Checked = true;
                 }
-                Comment.Content = content;
             }
             SoundTextBox.Focus();
         }
