@@ -32,7 +32,6 @@ namespace KanaRecite
         public MainWindow()
         {
             InitializeComponent();
-            
             for (int i = 0; i < 104; i++)
             {
                 HiraganaDict.Add(hArray[i], sArray[i]);
@@ -52,12 +51,17 @@ namespace KanaRecite
         }
         private void ExitButtonClick(object sender, RoutedEventArgs e)
         {
-            
+            shutdown();
+        }
+
+        private void shutdown()
+        {
             var leftAnimation = new DoubleAnimation(Left, Left + Width / 2, TimeSpan.FromMilliseconds(160));
             var widthAnimation = new DoubleAnimation(Width, 0, TimeSpan.FromMilliseconds(160));
             widthAnimation.Completed += (s, ev) => Application.Current.Shutdown();
             BeginAnimation(LeftProperty, leftAnimation);
             BeginAnimation(WidthProperty, widthAnimation);
+
         }
 
         private void WinMouseDown(object sender, MouseButtonEventArgs e)
@@ -80,7 +84,6 @@ namespace KanaRecite
         private void check()
         {
             var sound = HiraganaDict[Gana.Content.ToString().Trim()].Trim();
-            string content;
             if (string.IsNullOrEmpty(SoundTextBox.Text.Trim()))
             {
                 Comment.Content = "You typed nothing.";
@@ -127,6 +130,10 @@ namespace KanaRecite
                 {
                     check();
                 }
+            }
+            else if (e.Key == Key.D && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+            {
+                shutdown();
             }
         }
 
