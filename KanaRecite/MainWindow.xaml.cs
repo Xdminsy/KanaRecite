@@ -93,19 +93,20 @@ namespace KanaRecite
             }
             else
             {
+                Emptyed = false;
                 if (SoundTextBox.Text.Trim() == sound)
                 {
                     content = praise[r.Next(praise.Length)];
+                    commentIn((s, e) => { commentFlash((s2, e2) => { commentOut((s3, e3) => { nextKana(); }); }); });
                 }
                 else
                 {
                     content = "Sorry, it's " + sound;
+                    commentIn();
+                    Checked = true;
                 }
-                Checked = true;
-                Emptyed = false;
-                commentIn();
+                Comment.Content = content;
             }
-            Comment.Content = content;
             SoundTextBox.Focus();
         }
         private void CheckButtonClick(object sender, RoutedEventArgs e)
@@ -135,28 +136,31 @@ namespace KanaRecite
             nextKana();
         }
 
-        private void commentIn()
+        private void commentIn(EventHandler e = null)
         {
             var anim = new ThicknessAnimation();
             anim.From = new Thickness(-Comment.Width, Comment.Margin.Top, Comment.Margin.Right, Comment.Margin.Bottom);
             anim.To = new Thickness(0, Comment.Margin.Top, 0, Comment.Margin.Bottom);
             anim.Duration = TimeSpan.FromMilliseconds(100);
+            if(e != null)anim.Completed += e;
             Comment.BeginAnimation(Label.MarginProperty, anim);
         }
 
-        private void commentOut()
+        private void commentOut(EventHandler e = null)
         {
             var anim = new ThicknessAnimation();
             anim.From = Comment.Margin;
             anim.To = new Thickness(Comment.Margin.Left + Width, Comment.Margin.Top, Comment.Margin.Right, Comment.Margin.Bottom);
             anim.Duration = TimeSpan.FromMilliseconds(100);
+            if (e != null) anim.Completed += e;
             Comment.BeginAnimation(Label.MarginProperty, anim);
         }
 
-        private void commentFlash()
+        private void commentFlash(EventHandler e = null)
         {
             var anim = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(150));
             anim.RepeatBehavior = new RepeatBehavior(2);
+            if (e != null) anim.Completed += e;
             Comment.BeginAnimation(Label.OpacityProperty, anim);
         }
     }
