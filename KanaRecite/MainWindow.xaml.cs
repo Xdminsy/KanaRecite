@@ -101,7 +101,7 @@ namespace KanaRecite
                 }
                 else
                 {
-                    Comment.content = "Sorry, it's " + sound;
+                    Comment.Content = "Sorry, it's " + sound;
                     commentIn();
                     Checked = true;
                 }
